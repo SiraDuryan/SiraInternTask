@@ -5,7 +5,7 @@ class Validator {
   };
 
   static isPhoneValid = (phone) => {
-    const regexp = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+    const regexp = /^[0-9+-]*$/;
     return regexp.test(phone);
   };
 }
