@@ -1,0 +1,43 @@
+.P-sidebar {
+  width: 25%;
+  min-width: 300px;
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  background-image: url(../../assets/images/students4.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  // linear-gradient(90deg, rgba(91, 91, 92, 0.709) 32%, rgb(105, 105, 107) 250%), 
+
+  a {
+    margin-bottom: 25px;
+    font-size: 24px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 27px;
+    border: 1px solid grey;
+    border-radius: 5px;
+
+  }
+
+  a:hover {
+    cursor: pointer;
+    height: 50px;
+    background-color: rgb(210, 207, 207);
+    position: relative;
+    bottom: 5px;
+  }
+
+  .active {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    background-color: rgba(228, 228, 228, 0.1);
+    padding: 10px;
+  }
+
+
+}

@@ -1,0 +1,21 @@
+.P-modify-user {
+  width: 75%;
+  padding: 40px;
+  background-image: url(../../assets/images/background.png);
+  background-position: center;
+  background-size: cover;
+
+  .P-modify-block {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    input {
+      width: 45%;
+      margin: 25px;
+    }
+  }
+
+}

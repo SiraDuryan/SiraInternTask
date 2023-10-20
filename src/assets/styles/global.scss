@@ -1,0 +1,43 @@
+@import "./variables.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.G-page {
+  width: 100%;
+  display: flex;
+}
+
+.G-input {
+  min-width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 10px;
+  border: 1px solid lightgray;
+}
+
+.G-btn {
+  width: 200px;
+  height: 40px;
+  padding: 7px 25px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e4e4e4;
+  background: $app-color;
+  border: 0;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+}
