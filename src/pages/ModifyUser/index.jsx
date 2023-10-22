@@ -60,7 +60,6 @@ function ModifyUser() {
     const isEmailExists = isUserWithSameEmailExists(user);
 
     if (userToEdit) {
-      // If you are editing an existing user
       if (userToEdit.phone !== user.phone && isPhoneExists) {
         NotificationManager.error(
           "Phone Number already exists in the database."
@@ -71,7 +70,6 @@ function ModifyUser() {
         Validator.isEmailValid(user.email) &&
         Validator.isPhoneValid(user.phone)
       ) {
-        // Update the user data and navigate
         const updatedUsers = existingUsers.map((item) =>
           item.id === userToEdit.id ? user : item
         );
@@ -85,7 +83,6 @@ function ModifyUser() {
         );
       }
     } else {
-      // If you are creating a new user
       if (isPhoneExists) {
         NotificationManager.error(
           "Phone Number already exists in the database."
@@ -96,7 +93,6 @@ function ModifyUser() {
         Validator.isEmailValid(user.email) &&
         Validator.isPhoneValid(user.phone)
       ) {
-        // Save the new user and navigate
         const updatedUsers = [...existingUsers, user];
         localStorage.setItem("userList", JSON.stringify(updatedUsers));
         navigate(ROUTES.USERS);
