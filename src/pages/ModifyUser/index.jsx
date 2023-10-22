@@ -38,7 +38,7 @@ function ModifyUser() {
       setUser(userToEdit);
     }
   }, [userToEdit]);
-  
+
   const isUserWithSamePhoneExists = (newUser) => {
     return existingUsers.some(
       (existingUser) => existingUser.phone === newUser.phone
@@ -59,38 +59,54 @@ function ModifyUser() {
     const isPhoneExists = isUserWithSamePhoneExists(user);
     const isEmailExists = isUserWithSameEmailExists(user);
 
-    if (
-      Validator.isEmailValid(user.email) &&
-      Validator.isPhoneValid(user.phone)
-    ) {
-      if (isPhoneExists && isEmailExists) {
+    if (userToEdit) {
+      // If you are editing an existing user
+      if (userToEdit.phone !== user.phone && isPhoneExists) {
         NotificationManager.error(
-          "User with the same phone number and email already exists."
+          "Phone Number already exists in the database."
         );
-      } else if (isPhoneExists) {
+      } else if (userToEdit.email !== user.email && isEmailExists) {
+        NotificationManager.error("Email already exists in the database.");
+      } else if (
+        Validator.isEmailValid(user.email) &&
+        Validator.isPhoneValid(user.phone)
+      ) {
+        // Update the user data and navigate
+        const updatedUsers = existingUsers.map((item) =>
+          item.id === userToEdit.id ? user : item
+        );
+        localStorage.setItem("userList", JSON.stringify(updatedUsers));
+        navigate(ROUTES.USERS);
+      } else if (!Validator.isEmailValid(user.email)) {
+        NotificationManager.error("Invalid Email Format (example@mail.com)");
+      } else if (!Validator.isPhoneValid(user.phone)) {
         NotificationManager.error(
-          "User with the same phone number already exists."
+          "Invalid Phone Number Format. Phone Number can contain only numbers and +"
+        );
+      }
+    } else {
+      // If you are creating a new user
+      if (isPhoneExists) {
+        NotificationManager.error(
+          "Phone Number already exists in the database."
         );
       } else if (isEmailExists) {
-        NotificationManager.error("User with the same email already exists.");
-      } else {
-        if (userToEdit) {
-          const updatedUsers = existingUsers.map((item) =>
-            item.id === userToEdit.id ? user : item
-          );
-          localStorage.setItem("userList", JSON.stringify(updatedUsers));
-        } else {
-          const updatedUsers = [...existingUsers, user];
-          localStorage.setItem("userList", JSON.stringify(updatedUsers));
-        }
+        NotificationManager.error("Email already exists in the database.");
+      } else if (
+        Validator.isEmailValid(user.email) &&
+        Validator.isPhoneValid(user.phone)
+      ) {
+        // Save the new user and navigate
+        const updatedUsers = [...existingUsers, user];
+        localStorage.setItem("userList", JSON.stringify(updatedUsers));
         navigate(ROUTES.USERS);
+      } else if (!Validator.isEmailValid(user.email)) {
+        NotificationManager.error("Invalid Email Format (example@mail.com)");
+      } else if (!Validator.isPhoneValid(user.phone)) {
+        NotificationManager.error(
+          "Invalid Phone Number Format. Phone Number can contain only numbers and +"
+        );
       }
-    } else if (!Validator.isEmailValid(user.email)) {
-      NotificationManager.error("Invalid Email Format (example@mail.com)");
-    } else if (!Validator.isPhoneValid(user.phone)) {
-      NotificationManager.error(
-        "Invalid Phone Number Format. Phone Number can contain only numbers and +"
-      );
     }
   };
 
